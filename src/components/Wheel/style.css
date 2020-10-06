@@ -1,0 +1,208 @@
+:root {
+  --wheel-size: 265px;
+  --item-space: 20px;
+  --wheel-border-size: 5px;
+  --wheel-color: #832A4B;
+  --clr-white: white;
+  --total-items: 0;
+  --item-index: 0;
+  --spin-duration: 4s;
+  --reset-duration: 0.25s;
+}
+
+.wheel-container {
+  display: block;
+  position: relative;
+  box-sizing: content-box;
+  width: calc(var(--wheel-size) + var(--wheel-border-size));
+  height: calc(var(--wheel-size) + var(--wheel-border-size) + 80px);
+  padding: 3px;
+  margin: auto;
+  background-color: var(--clr-white);
+  border-radius: 50%;
+  user-select: none;
+  --no-of-turns: 5;
+}
+
+.wheel {
+  display: block;
+  position: relative;
+  box-sizing: content-box;
+  margin: auto;
+  padding: 0;
+  width: var(--wheel-size);
+  height: var(--wheel-size);
+  border: solid var(--wheel-color) var(--wheel-border-size);
+  overflow: hidden;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: rotate(0deg);
+}
+
+.item-text {
+  color: #ffffff;
+  position: absolute;
+  font-size: 11px;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  text-align: center;
+  display: block;
+  transform: skewY(45deg) rotate(20deg);
+  padding-top: 20px;
+}
+
+.item-text .text {
+  transform: rotate(-90deg);
+  padding: 0px 45% 0px 30%;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.wheel-item {
+  transform: rotate(var(--item-angle)) skewY(-45deg);
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  transform-origin: 0% 100%;
+}
+
+.item-text .circle1 {
+  position: absolute;
+  border: 1px solid #FFDDA1;
+  background-color: #FFDDA1;
+  border-radius: 50%;
+  height: 6px;
+  width: 6px;
+  left: 38%;
+  top: 14px;
+}
+
+.item-text .circle2 {
+  position: absolute;
+  border: 1px solid #FFDDA1;
+  background-color: #FFDDA1;
+  border-radius: 50%;
+  height: 6px;
+  width: 6px;
+  left: 58%;
+  top: 14px;
+}
+
+div:nth-child(4n+1).wheel-item .item-text {
+  background-color: #832A4B;
+}
+
+div:nth-child(4n+2).wheel-item .item-text {
+  background-color: #742543;
+}
+
+div:nth-child(4n+3).wheel-item .item-text {
+  background-color: #551B31;
+}
+
+div:nth-child(4n).wheel-item .item-text {
+  background-color: #65203A;
+}
+
+.spin-button {
+  position: absolute;
+  content: 'Spin';
+  background-color: #FFDDA1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 65px;
+  z-index: 2;
+  top: 39%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.spin-button:focus {
+  outline: none;
+}
+
+.down-arrow {
+  position: absolute;
+  z-index: 30;
+  height: 0;
+  width: 0;
+  left: 48%;
+  top: -17px;
+  border-width: 20px 15px 0 15px;
+  transform: scaley(2);
+  transform-origin: 50% 0;
+  border-color: #FFDDA1 transparent transparent transparent;
+  border-style: solid;
+}
+
+.down-arrow.move {
+  animation-name: DownArrow;
+  animation-duration: var(--spin-duration);
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes DownArrow {
+  0%, 100% {
+    transform: rotate(0deg) scaley(2);
+  }
+  5%, 10%, 16%, 23%, 31%, 40%, 50%, 61%, 73%, 86% {
+    transform: rotate(-30deg) scaley(2);
+  }
+  7.5%, 13%, 20.5%, 27%, 35.5%, 45%, 55.5%, 67%, 79.5% {
+    transform: rotate(-20deg) scaley(2);
+  }
+}
+
+.start-rotation {
+  transform: rotate(var(--transform-angle));
+  transition: transform var(--spin-duration) ease;
+}
+
+.curved-arrow {
+  cursor: pointer;
+  height: 36px;
+  width: 200px;
+  margin-left: 30px;
+  color: var(--clr-white);
+  font-weight: bold;
+  cursor: pointer !important;
+  position: relative;
+  margin-top: 30px;
+}
+
+.curved-arrow .arrow {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  height: 15px;
+  background-color: transparent;
+  width: inherit;
+}
+
+.curved-arrow .top {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  height: 10px;
+  background-color: white;
+  width: inherit;
+}
+
+.curved-arrow .bottom {
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  height: 10px;
+  background-color: white;
+  width: inherit;
+}
